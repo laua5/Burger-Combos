@@ -1,23 +1,29 @@
+# Main Routine v1 - Using a while loop
+
 import easygui
 
 # Main Routine
-print("######### Welcome! ##########")
+easygui.msgbox("######### Welcome! ##########")
 
 while True:
     choice = easygui.buttonbox(
         "\nWhat would you like to do?\n1: Search combos\n2: Print the"
-        " full list\n3: Add combo\n4: Delete Combo\n5: Exit\nPlease enter your "
-        "choice: ",
+        " full list\n3: Add combo\n4: Delete Combo\n5: Exit\nPlease enter your"
+        " choice: ",
         choices=["search", "print menu", "add combo",
                  "delete combo", "exit"])
     if choice == "search":
         # Search function goes here
+        pass  # Placeholder until the search function is added
     elif choice == "print menu":
         # Print menu function goes here
-    elif choice == 3:
-        # add function goes here
-    elif choice == 4:
-        # delete function goes here
+        pass  # Placeholder until the print menu function is added
+    elif choice == "add combo":
+        # Add function goes here
+        pass  # Placeholder until the add function is added
+    elif choice == "delete combo":
+        # Delete function goes here
+        pass  # Placeholder until the delete function is added
     else:
-        print("goodbye") # Exits the system
+        easygui.msgbox("goodbye")  # Exits the system
         break
