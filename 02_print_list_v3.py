@@ -1,3 +1,5 @@
+# print menu v3 - using dictionaries, shows basic information of each combo
+
 import easygui
 all_combo_info = []  # List used to display all combo info
 
@@ -17,15 +19,8 @@ def print_list():
     easygui.msgbox("Here is the list of combos: ")
     for combo_item, combo_info in combos.items():
         all_combo_info.append(f"\nCombo Name: {combo_item}\n")
-        total_cost = 0
         for key in combo_info:
-            all_combo_info.append(f"{key}: ${combo_info[key]:.2f}")
-            total_cost += combo_info[key]
-            total_cost = round(total_cost, 2)
-            if combo_item != "1":
-                all_combo_info.append("\n")
-        all_combo_info.append(f"Total cost for combo {combo_item} is "
-                              f"${total_cost:.2f}\n")
+            all_combo_info.append(f"{key}: ${combo_info[key]:.2f}\n")
     combo_info = "".join(all_combo_info)
     easygui.msgbox(f" ######## FULL MENU OF COMBOS ########\n{combo_info}")
 

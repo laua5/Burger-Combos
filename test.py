@@ -11,6 +11,16 @@ combos = {
 }
 
 
+# Number checker function used to check if prices are integers
+def number_checker(price):
+    try:
+        float_price = float(price)
+        return float_price > 0
+    except ValueError:
+        return False
+
+
+# Function to search for combos
 def search():
     while True:
         combo_names = easygui.enterbox("Please search for a combo name "
@@ -36,27 +46,26 @@ def search():
                     if change == "no":
                         break
                     else:
-                        item_found = False
                         change_item = easygui.enterbox("Which item would you "
-                                                       "like to "
-                                                       "change?: ")
-                        for key in combo_info:
-                            if key == change_item:
-                                combo_info.pop(change_item)
+                                                       "like to change?: ")
+                        # Check if the entered item exists in the combo
+                        keys_to_remove = []
+                        for item in combo_info:
+                            if item.lower() == change_item.lower():
                                 new_item = easygui.enterbox(f"What item would "
-                                                            f"you "
-                                                            f"like to replace "
-                                                            f"{change_item} "
-                                                            f"with? ")
-                                combos[combo_names][new_item] = new_item
+                                                            f"you like to "
+                                                            f"replace "
+                                                            f"{item} with? ")
+                                combo_info[new_item] = new_item
                                 new_price = easygui.enterbox(f"What is the "
                                                              f"price of "
                                                              f"{new_item}? ")
-                                new_price = float(new_price)
-                                combos[combo_names][new_item] = new_price
-                                item_found = True
-                                break
-                        if not item_found:
+                                combo_info[new_item] = float(new_price)
+                                keys_to_remove.append(item)
+                        # Remove the old items from the combo
+                        for item in keys_to_remove:
+                            combo_info.pop(item)
+                        if not keys_to_remove:
                             easygui.msgbox("Item not found.")
             if not combo_found:
                 easygui.msgbox("Combo not found.")
@@ -68,12 +77,12 @@ def add():
         the_name = easygui.enterbox("Enter Combo name to add (x to exit): ")
         if the_name == "x":
             break  # Exits loop back to main loop
-        for combo_name, combo_info in combos.items():
-            if combo_name.lower() or combo_name == the_name:
-                # Checks if combo name is already used
-                easygui.msgbox("Combo name has already been taken. Please "
-                               "enter another name, or exit the program.")
-                break
+        # Checks if name(lower and upper case) is already an existing combo
+        if the_name.lower() in (name.lower() for name in combos):
+            easygui.msgbox(
+                "Combo name has already been taken. Please enter another name,"
+                " or exit the program.")
+            continue
         else:
             while True:
                 combos[the_name] = {}
@@ -83,6 +92,10 @@ def add():
                 first_item_price = easygui.enterbox(f"Please enter price of "
                                                     f"{first_item} in dollars "
                                                     f"without $ sign: ")
+                if not number_checker(first_item_price):
+                    easygui.msgbox("Please enter a valid price "
+                                   "(a non-negative number).")
+                    continue
                 first_item_price = float(first_item_price)
                 combos[the_name][f'{first_item}'] = first_item_price
                 add_more_item = easygui.enterbox("Please enter another item to"
@@ -95,6 +108,10 @@ def add():
                         add_item_price = easygui.enterbox(f"Please enter price"
                                                           f" of "
                                                           f"{add_more_item}: ")
+                        if not number_checker(add_item_price):
+                            easygui.msgbox("Please enter a valid price "
+                                           "(a non-negative number).")
+                            continue
                         add_item_price = float(add_item_price)
                         combos[the_name][f'{add_more_item}'] = add_item_price
                         add_more_item = easygui.enterbox("Please enter another"
@@ -148,7 +165,7 @@ def delete():
         if delete_combo == "x":
             break  # Exits loop back to main loop
         else:
-            combo_found = False
+            combo_found = False  # Used to check if entered combo exists
             for combo_name, combo_info in combos.items():
                 if combo_name == delete_combo:
                     confirm_delete = easygui.buttonbox(f"Please confirm delete"
