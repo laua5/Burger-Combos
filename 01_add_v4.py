@@ -30,7 +30,8 @@ def add():
             break  # Exits loop back to main loop
         # Checks if name(lower and upper case) is already an existing combo
         if the_name.lower() in (name.lower() for name in combos):
-            easygui.msgbox("Combo name has already been taken. Please enter "
+            easygui.msgbox(f"Combo name {the_name} has already been taken. "
+                           f"Please enter "
                            "another name, or exit the program.")
             continue
         else:
@@ -90,4 +91,3 @@ def add():
 
 
 add()
-easygui.msgbox(combos)

@@ -92,6 +92,7 @@ def add():
                 first_item_price = easygui.enterbox(f"Please enter price of "
                                                     f"{first_item} in dollars "
                                                     f"without $ sign: ")
+                # Checks if price is valid
                 if not number_checker(first_item_price):
                     easygui.msgbox("Please enter a valid price "
                                    "(a non-negative number).")
@@ -108,6 +109,7 @@ def add():
                         add_item_price = easygui.enterbox(f"Please enter price"
                                                           f" of "
                                                           f"{add_more_item}: ")
+                        # Checks if price is valid
                         if not number_checker(add_item_price):
                             easygui.msgbox("Please enter a valid price "
                                            "(a non-negative number).")
@@ -120,6 +122,7 @@ def add():
                         if add_more_item == "x":
                             break
                     break
+            # Confirming and showing details
             for combo_name, combo_info in combos.items():
                 if combo_name == the_name:
                     confirm_list.append(f"Here is {the_name}'s combo info:\n")
@@ -153,6 +156,7 @@ def print_list():
                 all_combo_info.append("\n")
         all_combo_info.append(f"Total cost for combo {combo_item} is "
                               f"${total_cost:.2f}\n")
+    # Joins all strings into one string
     combo_info = "".join(all_combo_info)
     easygui.msgbox(f" ######## FULL MENU OF COMBOS ########\n{combo_info}")
 
