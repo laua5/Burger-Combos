@@ -1,4 +1,4 @@
-"""Burger combo v1
+"""Burger combo v2
 Components added after they have been created and tested, looping added"""
 
 import easygui
