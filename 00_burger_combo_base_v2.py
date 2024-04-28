@@ -1,6 +1,5 @@
 """Burger combo v1
-Components added after they have been created and tested"""
-
+Components added after they have been created and tested, looping added"""
 
 import easygui
 
@@ -190,9 +189,27 @@ def delete():
                 easygui.msgbox("Combo not found.")
 
 
-all_combo_info = []  # List used to display all combo info
-confirm_list = []  # List used in add function to confirm details of combo
-search_list = []  # List used in search function to show combo info
 # Main Routine
 easygui.msgbox("######### Welcome! ##########")
-
+while True:
+    all_combo_info = []  # List used to display all combo info
+    confirm_list = []  # List used in add function to confirm details of combo
+    search_list = []  # List used in search function to show combo info
+    choice = easygui.buttonbox("\nWhat would you like to do?\n1: Search combos"
+                               "\n2: Print the full list\n3: Add combo\n4: "
+                               "Delete Combo\n5: Exit\nPlease enter your "
+                               "choice: ", choices=["search", "print menu",
+                                                    "add combo", "delete combo"
+                                                                 "", "exit"])
+    # Displays program options
+    if choice == "search":
+        search()  # Search function to search for different combos
+    elif choice == "print menu":
+        print_list()  # Prints full combo menu
+    elif choice == "add combo":
+        add()  # Gives user option to add a new combo
+    elif choice == "delete combo":
+        delete()  # Delete function to delete a specific combo
+    else:
+        easygui.msgbox("Goodbye")  # Exits program
+        break
