@@ -121,7 +121,7 @@ def add():
                         add_item_price = float(add_item_price)
                         combos[the_name][f'{add_more_item}'] = add_item_price
                         add_more_item = easygui.enterbox("Please enter another"
-                                                         "item to add "
+                                                         " item to add "
                                                          "(x to exit): ")
                         if add_more_item == "x":
                             break
